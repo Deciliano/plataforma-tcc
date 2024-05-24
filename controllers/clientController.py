@@ -11,7 +11,7 @@ def get_clients_route():
 
 @client_bp.route('/clients/<int:client_id>', methods=['GET'])
 def get_client_route(client_id):
-    client = ClientService.get_client_by_id(client_id)
+    client = client_service.get_client_by_id(client_id)
     if client:
         return jsonify(client.to_dict())
     return jsonify({'message': 'Client not found'}), 404
@@ -27,14 +27,14 @@ def create_client_route():
 @client_bp.route('/clients/<int:client_id>', methods=['PUT'])
 def update_client_route(client_id):
     data = request.get_json()
-    client = ClientService.update_client(client_id, data)
+    client = client_service.update_client(client_id, data)
     if client:
         return jsonify(client.to_dict())
     return jsonify({'message': 'Client not found'}), 404
 
 @client_bp.route('/clients/<int:client_id>', methods=['DELETE'])
 def delete_client_route(client_id):
-    client = ClientService.delete_client(client_id)
+    client = client_service.delete_client(client_id)
     if client:
         return jsonify({'message': 'Client deleted'})
     return jsonify({'message': 'Client not found'}), 404
