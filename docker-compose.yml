@@ -24,6 +24,15 @@ services:
       - DATABASE_URL=postgresql://user:password@db:5432/mydatabase
     depends_on:
       - db
+
+  currencies:
+    build:
+      context: ./currencies
+      dockerfile: Dockerfile
+    container_name: currencies_app
+    ports:
+      - "5002:5000"
+      
   db:
     image: postgres:13
     environment:
@@ -34,6 +43,7 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
 
 volumes:
   pgdata:
