@@ -26,7 +26,7 @@ def get_all_products_route():
     products = product_service.get_all_products()
     return jsonify([product.to_dict() for product in products])
 
-@product_bp.route('/product/update/<int:product_id>,', methods=['PUT'])
+@product_bp.route('/product/update/<int:product_id>', methods=['PUT'])
 def update_product_route(product_id):
     data = request.get_json()
     product = product_service.update_product(product_id, data)
